@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigilynx - Human Safety Control</title>
+    <!-- Link to Google Font: Dancing Script -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap">
+    <style>
+        /* CSS styles for the website */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7; /* Light gray background */
+        }
+
+        /* Navigation bar styles */
+        nav {
+            background-color: #3498db; /* Blue background */
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px; /* Increase margin between links */
+            font-weight: bold;
+        }
+
+        nav .company-name {
+            position: absolute;
+            left: 50%; /* Center position */
+            transform: translateX(-50%); /* Center alignment */
+            top: 50px; /* Adjust top margin to bring "Vigilynx" much lower */
+            color: #3498db; /* Change the color to match the background */
+            font-family: 'Dancing Script', cursive; /* Aesthetic font for company name */
+            font-size: 2.5rem; /* Increase font size */
+        }
+
+        /* Main content styles */
+        .section {
+            padding: 60px 20px;
+            margin-top: 60px; /* Offset for fixed nav */
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50; /* Dark blue */
+        }
+
+        p {
+            text-align: center;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        /* Home section styles */
+        #home {
+            background-color: #e0f7fa; /* Light cyan background */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #home h1 {
+            font-size: 3rem;
+            color: #00796b; /* Dark teal */
+        }
+
+        /* Safety control container styles */
+        .container {
+            max-width: 500px; /* Increase max-width */
+            margin: 0 auto;
+            padding: 40px; /* Increase padding */
+            background-color: #ffffff; /* White background */
+            border-radius: 12px; /* Larger border-radius for rounded corners */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Start with opacity 0 for fade-in effect */
+            transform: translateY(20px); /* Start below initial position */
+            transition: opacity 0.8s, transform 0.8s; /* Smooth transitions */
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Individual detail styles */
+        .detail {
+            padding: 30px; /* Increase padding */
+            margin-bottom: 20px; /* Add space between paddings */
+            border-bottom: 1px solid #e0e0e0; /* Light gray border */
+        }
+
+        .detail:last-child {
+            border-bottom: none; /* Remove border for last detail */
+        }
+
+        .detail span {
+            font-weight: bold;
+            color: #3498db; /* Blue for detail value */
+        }
+
+        /* Safe to drive status styles */
+        .safe-to-drive {
+            padding: 30px; /* Increase padding */
+            background-color: #a5d6a7; /* Light green background */
+            color: #004d40; /* Dark green text */
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 20px; /* Margin top for separation */
+        }
+
+        /* Statistics section styles */
+        #statistics {
+            background-color: #ffffff; /* White background */
+            padding: 40px 20px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e0e0e0; /* Light gray border */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #f3f3f3; /* Light gray background */
+        }
+
+        .stat-card h3 {
+            margin-top: 0;
+            color: #00796b; /* Dark teal */
+        }
+
+        /* About Us section styles */
+        #about {
+            background-color: #ffffff; /* White background */
+        }
+
+        /* Contact section styles */
+        #contact {
+            background-color: #f3e5f5; /* Light pink background */
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <a href="#home">Home</a>
+        <span class="company-name">Vigilynx</span>
+        <a href="#statistics">Statistics</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Home section -->
+    <div id="home" class="section">
+        <div class="container fade-in">
+            <h2>Human Safety Control</h2>
+            <!-- Safety control detail sections -->
+            <div class="detail" id="helmet-status">
+                Helmet: <span id="helmet-text">Unknown</span>
+            </div>
+            <div class="detail" id="alcohol-status">
+                Drunk: <span id="alcohol-text">Unknown</span>
+            </div>
+            <div class="detail" id="speed-status">
+                Overspeeding: <span id="speed-text">Unknown</span>
+            </div>
+            <div class="detail" id="location-status">
+                Location: <span id="location-text">Unknown</span>
+            </div>
+            <!-- Safe to drive status -->
+            <div class="safe-to-drive" id="safe-to-drive">
+                Safe to Drive: Unknown
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics section -->
+    <div id="statistics" class="section fade-in">
+        <h2>Statistics</h2>
+        <div class="stat-card">
+            <h3>Helmet Usage:</h3>
+            <p>85% of drivers wear helmets.</p>
+        </div>
+        <div class="stat-card">
+            <h3>Alcohol Consumption:</h3>
+            <p>10% of drivers have driven under the influence.</p>
+        </div>
+        <div class="stat-card">
+            <h3>Speeding Instances:</h3>
+            <p>15% of drivers have been caught overspeeding.</p>
+        </div>
+        <div class="stat-card">
+            <h3>Safe Driving:</h3>
+            <p>75% of trips are safe to drive.</p>
+        </div>
+    </div>
+
+    <!-- About Us section -->
+    <div id="about" class="section">
+        <h2 class="fade-in">About Us</h2>
+        <p class="fade-in">We are a team of passionate individuals dedicated to providing high-quality services.</p>
+    </div>
+
+    <!-- Contact section -->
+    <div id="contact" class="section">
+        <h2 class="fade-in">Contact</h2>
+        <p class="fade-in">Feel free to reach out to us for any inquiries.</p>
+    </div>
+
+    <!-- JavaScript for smooth scrolling and fade-in animations -->
+    <script>
+        // Simulated data (in a real scenario, this data would come from a backend API)
+        const data = {
+            helmet: true,
+            drunk: false,
+            speed: false,
+            location: '37.7749° N, 122.4194° W' // coordinates
+        };
+
+        // Function to update the UI with the provided data
+        function updateUI(data) {
+            // Update helmet status
+            const helmetText = document.getElementById('helmet-text');
+            helmetText.textContent = data.helmet ? 'Yes' : 'No';
+
+            // Update alcohol status
+            const alcoholText = document.getElementById('alcohol-text');
+            alcoholText.textContent = data.drunk ? 'Yes' : 'No';
+
+            // Update speed status
+            const speedText = document.getElementById('speed-text');
+            speedText.textContent = data.speed ? 'Yes' : 'No';
+
+            // Update location status
+            const locationText = document.getElementById('location-text');
+            locationText.textContent = data.location;
+
+            // Determine if the vehicle is safe to drive
+            const isSafeToDrive = data.helmet && !data.drunk && !data.speed;
+
+            // Update safe to drive status
+            const safeToDriveText = document.getElementById('safe-to-drive');
+            safeToDriveText.textContent = `Safe to Drive: ${isSafeToDrive ? 'Yes' : 'No'}`;
+        }
+
+        // Initialize the UI with the simulated data
+        updateUI(data);
+
+        // Smooth scrolling for navigation links
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetId = link.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll animations for fading in sections
+        function onScroll() {
+            const sections = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+
+            sections.forEach(section => {
+                const position = section.getBoundingClientRect();
+                if (position.top < windowHeight && position.bottom >= 0) {
+                    section.classList.add('visible');
+                }
+            });
+
+            const container = document.querySelector('.container');
+            if (container.getBoundingClientRect().top < windowHeight && container.getBoundingClientRect().bottom >= 0) {
+                container.classList.add('visible');
+            }
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('load', onScroll); // Initial check on page load
+    </script>
+</body>
+
+</html>
