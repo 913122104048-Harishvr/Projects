@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roamify - Your Ultimate Tourist Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .section:hover {
+            background-color: #e0e0e0;
+        }
+
+        .section a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .section a:hover {
+            color: #45a049;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .input-group input {
+            width: calc(100% - 24px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            width: 100%;
+            max-width: 200px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .map-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .contact-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="#" title="Go to Home" id="homeSection">Home</a>
+            <a href="#" title="Find more about us" id="aboutSection">About</a>
+            <a href="#" title="Contact us for any query" id="contactSection">Contact</a>
+        </div>
+
+        <h1>Roamify</h1>
+
+        <div class="section">
+            <div class="input-group">
+                <label for="budget">Budget:</label>
+                <input type="text" id="budget" placeholder="Enter your budget">
+            </div>
+
+            <div class="input-group">
+                <label for="place">Place:</label>
+                <input type="text" id="place" placeholder="Enter your destination">
+            </div>
+
+            <div class="input-group">
+                <label for="days">Number of Days:</label>
+                <input type="text" id="days" placeholder="Enter number of days">
+            </div>
+
+            <button class="btn" onclick="planTrip()">Plan Trip</button>
+        </div>
+
+        <div class="map-container" id="mapContainer">
+            <!-- Map will be displayed here -->
+        </div>
+
+        <div class="section">
+            <div class="contact-info">
+                <h2>About Us</h2>
+                <p>Roamify is your go-to destination for all your travel needs. Whether you're looking for inspiration for your next adventure or need help planning the perfect trip, we've got you covered.</p>
+                <h2>Contact</h2>
+                <p>Email: info@roamify.com</p>
+                <p>Phone: 6369339785 </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("homeSection").addEventListener("click", function() {
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById("aboutSection").addEventListener("click", function() {
+            document.querySelector('.section:nth-of-type(2)').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById("contactSection").addEventListener("click", function() {
+            document.querySelector('.section:last-of-type').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function planTrip() {
+            var place = document.getElementById("place").value;
+            var budget = document.getElementById("budget").value;
+            var days = document.getElementById("days").value;
+
+            // Example: Construct URL for a generic road map image
+            var mapImageURL = "https://via.placeholder.com/600x400?text=Map+of+" + encodeURIComponent(place);
+
+            // Display map image
+            var mapContainer = document.getElementById('mapContainer');
+            mapContainer.innerHTML = '<img src="' + mapImageURL + '" alt="Map of ' + place + '" class="map-image">';
+
+            // Display description
+            var description = "<h2>Trip Details</h2>" +
+                "<p>You're planning a trip to <strong>" + place + "</strong> for <strong>" + days + "</strong> days with a budget of <strong>$" + budget + "</strong>.</p>" +
+                "<p>Enjoy your adventure!</p>";
+            mapContainer.innerHTML += description;
+
+            document.querySelector('.map-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>
